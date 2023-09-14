@@ -1,4 +1,5 @@
 <script>
+	import { onDestroy } from "svelte";
 	import TaskList from "../../components/task-manager/TaskList.svelte";
 	import {taskListStore} from "../../stores/task";
 
@@ -10,11 +11,19 @@
 
 	let _taskList
 
-	taskListStore.subscribe((value) => {
+	const unsub = taskListStore.subscribe((value) => {
 		console.log('Subscribe called, '+ JSON.stringify(value));
 		_taskList = value;
 	})
+
+	onDestroy(() => {
+		unsub();
+	})
 </script>
+
+<a href="/" class="text-white">
+	Go home
+</a>
 
 <div class="p-10 h-full">
 	<div class="text-white text-2xl mb-6">Some List</div>
