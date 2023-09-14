@@ -1,9 +1,19 @@
 
-{#if false}
+<script>
+    let isEditing = false;
+</script>
+
+
+{#if isEditing}
     <div class="flex-it">
         <textarea />
-        <button class="flex underline"> Close </button>
+        <button
+            on:click={() => isEditing = false}
+            class="flex underline"> Close 
+        </button>
     </div>
 {:else}
-    <slot />
+   <button on:click={() => isEditing = true}>
+       <slot />
+   </button> 
 {/if}
