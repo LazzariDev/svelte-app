@@ -1,14 +1,14 @@
 
 <script>
+    export let defaultValue
+
     let isEditing = false;
-    // let val;
-    let value
+    let value = defaultValue
 </script>
 
 
 {#if isEditing}
     <div class="flex-it">
-        <!-- <textarea bind:value={val}/> -->
         <textarea bind:value/>
 
         <button
