@@ -11,7 +11,7 @@
 
 
 <div class="text-white">
-	{JSON.stringify($taskListStore)}
+	<!-- {JSON.stringify($taskListStore)} -->
 </div>
 
 <div class="p-10 h-full">
