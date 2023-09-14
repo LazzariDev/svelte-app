@@ -1,5 +1,6 @@
 <script>
 	import TaskList from "../../components/task-manager/TaskList.svelte";
+	import {taskListStore} from "../../stores/task"
 
 	const taskList = [
 		{id: "l-1", text: "List 1", items: [{id: "t-1", text: "Task 1"},{id: "t-2", text: "Task 2"},{id: "t-3", text: "Task 3"}]},
