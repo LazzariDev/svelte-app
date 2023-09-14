@@ -4,8 +4,8 @@
     export let task;
     
     let taskText = task.text;
-    function updateTask() {
-        alert("Should update the task")
+    function updateTask(event) {
+        alert(`Updated task with value: ${event.detail.taskString}`)
     }
 </script>
 
