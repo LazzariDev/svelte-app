@@ -8,6 +8,7 @@ function createStore() {
 
         taskList.update((list) => {
             list.push(1);
+            console.log(list);
             return list;
         })
 
