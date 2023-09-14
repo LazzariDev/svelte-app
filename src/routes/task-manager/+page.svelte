@@ -1,5 +1,7 @@
 <script>
 	import TaskList from "../../components/task-manager/TaskList.svelte";
+
+	const listName = "Hi there";
 </script>
 
 <div class="p-10 h-full">
@@ -9,7 +11,9 @@
 	</button>
 	<div class="flex-it h-full">
 		<div class="flex-it flex-row rounded-xl h-full">
-			<TaskList />
+			<TaskList listName={`My value: ${listName}`}/>
+			<TaskList {listName}/>
+			<TaskList listName="Chimera"/>
 		</div>
 	</div>
 </div>
