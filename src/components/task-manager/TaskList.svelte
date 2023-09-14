@@ -3,6 +3,11 @@
 
     export let listName;
     export let tasks;
+
+
+    function updateTask(event) {
+        alert(`Updated task with value: ${event.detail.taskString}`)
+    }
 </script>
 
 <div class="flex-it h-full w-80 max-w-sm min-h-full m-2 my-0">
@@ -33,7 +38,7 @@
         <div class="overflow-x-hidden overflow-y-auto with-scrollbar p-2">
             
             {#each tasks as task (task.id)}
-                <TaskItem {task}/>
+                <TaskItem {task} on:editClosed={updateTask}/>
             {/each}
             
         </div>
