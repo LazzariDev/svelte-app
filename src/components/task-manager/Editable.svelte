@@ -1,9 +1,8 @@
 
 <script>
-    export let defaultValue
+    export let value;
 
     let isEditing = false;
-    let value = defaultValue
 </script>
 
 
