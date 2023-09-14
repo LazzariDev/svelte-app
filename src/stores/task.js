@@ -2,11 +2,17 @@
 import { writable } from "svelte/store";
 
 function createStore() {
-    let i = 0;
+
     const taskList = writable([], () => {
-        setInterval(() => {
+        let i = 0;
+        const id = setInterval(() => {
+            console.log("Updating Value");
             taskList.update((list) => [...list, i++])
-        }, 1500);
+        }, 2000);
+
+        return () => {
+            clearInterval(id);
+        }
     });
 
     return taskList;
