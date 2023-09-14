@@ -4,15 +4,16 @@
     export let task;
     
     let taskText = task.text;
+    function updateTask() {
+        alert("Should update the task")
+    }
 </script>
 
 <div class="flex-it border border-solid p-2 rounded-xl bg-slate-500 mb-2 cursor-pointer">
     <div class="flex-it">
         <Editable
             bind:value={taskText}
-            on:nameEvent={() => {
-                alert("Editing was close")
-            }}
+            on:editClosed={updateTask}
         >
             <div class="flex-it flex-row">
                 <div class="flex flex-1"> {task.text} </div>

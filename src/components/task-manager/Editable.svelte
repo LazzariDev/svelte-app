@@ -16,7 +16,7 @@
         <button
             on:click={() => {
                     isEditing = false
-                    dispatch('nameEvent')
+                    dispatch('editClosed')
                 }}
             class="flex underline"> Close 
         </button>
