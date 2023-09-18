@@ -1,15 +1,25 @@
 <script>
 	import Editable from "./Editable.svelte";
+    import { taskListStore } from "../../stores/task";
 
     export let task;
+    export let listIdx;
     
     let taskText = task.text;
 
     function updateTask(event) {
-        alert(`
-            Task ID: ${task.id},
-            Update value: ${event.detail.taskString}
-        `)
+        const taskIdx = $taskListStore[listIdx].items.findIndex(item => item.id === task.id);
+
+        if (taskIdx > -1) {
+            taskListStore.update(list => {
+                list[listIdx].items[taskIdx] = {
+                    id: task.id,
+                    text: event.detail.taskString
+                };
+
+                return list;
+            })
+        }
     }
 
 </script>

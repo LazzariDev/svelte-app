@@ -3,6 +3,7 @@
 
     export let listName;
     export let tasks;
+    export let listIdx;
 
 
     function updateTask(event) {
@@ -38,7 +39,10 @@
         <div class="overflow-x-hidden overflow-y-auto with-scrollbar p-2">
             
             {#each tasks as task (task.id)}
-                <TaskItem {task} />
+                <TaskItem 
+                {task}
+                {listIdx}
+                />
             {/each}
             
         </div>
