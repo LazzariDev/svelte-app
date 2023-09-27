@@ -10,8 +10,12 @@ const DEFAULT_DATA = [
 function createStore() {
 
     const taskList = writable(DEFAULT_DATA);
+    const {subscribe} = taskList;
+    
 
-    return taskList;
+    return {
+        subscribe
+    };
 }
 
 export const taskListStore = createStore();
