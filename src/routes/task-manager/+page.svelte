@@ -19,8 +19,7 @@
 
 			{#each $taskListStore as list, listIdx (list.id)}
 				<TaskList
-					listName={list.text}
-					tasks={list.items}
+					{list}
 					{listIdx}
 				/>
 			{/each}
