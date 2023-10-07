@@ -7,6 +7,9 @@
 <script>
 	import { taskListStore } from "../../stores/task";
 	import TaskItem from "./TaskItem.svelte";
+    import { flip } from "svelte/animate";
+    import { fade, fly } from "svelte/transition";
+    import { send, receive } from "../../transitions";
 
     export let list;
     export let listIdx;
@@ -57,11 +60,22 @@
         <div class="overflow-x-hidden overflow-y-auto with-scrollbar p-2">
             
             {#each list.items as task, taskIdx (task.id)}
-                <TaskItem 
-                {task}
-                {listIdx}
-                {taskIdx}
-                />
+                <!-- <div
+                    in:receive={{key: task.id}}
+                    out:send={{key: task.id}}
+                    animate:flip
+                > -->
+                <div
+                    out:fly={{x: 200}}
+                    in:fade
+                    animate:flip
+                >
+                    <TaskItem 
+                    {task}
+                    {listIdx}
+                    {taskIdx}
+                    />
+                </div>
             {/each}
             
         </div>
