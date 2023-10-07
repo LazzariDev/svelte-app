@@ -64,6 +64,12 @@ function createStore() {
                 list[listIdx].items.splice(itemIdx, 1);
                 return list;
             })
+        },
+        removeList: (listIdx) => {
+            update(list => {
+                list.splice(listIdx, 1);
+                return list;
+            })
         }
     };
 }
