@@ -17,7 +17,7 @@
             on:click={() => {
                     isEditing = false
                     dispatch('editClosed', {
-                        taskString: value
+                        value
                     })
                 }}
             class="flex underline"> Close 
