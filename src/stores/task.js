@@ -58,6 +58,12 @@ function createStore() {
                 list[moveToListIdx].items.push(task);
                 return list;
             })
+        },
+        removeTask: (listIdx, itemIdx) => {
+            update(list => {
+                list[listIdx].items.splice(itemIdx, 1);
+                return list;
+            })
         }
     };
 }
