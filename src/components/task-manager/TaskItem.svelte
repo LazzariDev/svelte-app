@@ -16,7 +16,6 @@
     }
 
     function dragStart (e) {
-        console.log('Dragging Item start');
         const data = {listIdx, taskIdx};
         const json = e.dataTransfer.setData("text/plain", JSON.stringify(data));
     }
