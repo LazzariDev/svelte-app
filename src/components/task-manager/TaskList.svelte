@@ -15,9 +15,7 @@
         const sourceJson = e.dataTransfer.getData("text/plain");
         const sourceData = JSON.parse(sourceJson);
 
-        console.log(`Dropping to list idx: ${listIdx}`);
-        console.log(`Source list idx: ${sourceData.listIdx}`);
-        console.log(`Source task idx: ${sourceData.listIdx}`);
+        taskListStore.moveTask(sourceData, listIdx);
     }
 </script>
 
