@@ -1,3 +1,9 @@
+<script context="module"> // Only one script for every taskList component inseted everyone has a copy of its own
+	import { writable } from "svelte/store";
+
+    let listHoverId = writable(null);
+</script>
+
 <script>
 	import { taskListStore } from "../../stores/task";
 	import TaskItem from "./TaskItem.svelte";
@@ -5,23 +11,24 @@
     export let list;
     export let listIdx;
 
-
-    /* function updateTask(event) {
-        alert(`Updated task with value: ${event.detail.taskString}`)
-    } */
-
     function drop(e) {
         const sourceJson = e.dataTransfer.getData("text/plain");
         const sourceData = JSON.parse(sourceJson);
 
         taskListStore.moveTask(sourceData, listIdx);
+        listHoverId.set(null)
     }
 </script>
 
 <div class="flex-it h-full w-80 max-w-sm min-h-full m-2 my-0">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div 
+        on:dragenter={() => {
+            listHoverId.set(list.id);
+        }}
         on:dragover|preventDefault={() => {}}
         on:drop={drop}
+        class:hovering={list.id === $listHoverId}
         class="bg-slate-400 flex-it rounded-xl max-h-full border-2 border-gray-500"
     >
         <div class="flex-it m-3">
@@ -66,3 +73,9 @@
         </button>
     </div>
 </div>
+
+<style>
+    .hovering {
+        border: 2px solid orange;
+    }
+</style>

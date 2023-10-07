@@ -22,6 +22,7 @@
     }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
     draggable={true}
     on:dragstart={dragStart}
