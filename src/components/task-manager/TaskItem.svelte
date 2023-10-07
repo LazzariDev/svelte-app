@@ -4,6 +4,7 @@
 
     export let task;
     export let listIdx;
+    export let taskIdx;
     
     let taskText = task.text;
 
@@ -14,8 +15,10 @@
         }, listIdx)
     }
 
-    function dragStart () {
+    function dragStart (e) {
         console.log('Dragging Item start');
+        const data = {listIdx, taskIdx};
+        const json = e.dataTransfer.setData("text/plain", JSON.stringify(data));
     }
 </script>
 

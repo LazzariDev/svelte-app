@@ -11,8 +11,13 @@
         alert(`Updated task with value: ${event.detail.taskString}`)
     } */
 
-    function drop() {
-        console.log('Dropping Item');
+    function drop(e) {
+        const sourceJson = e.dataTransfer.getData("text/plain");
+        const sourceData = JSON.parse(sourceJson);
+
+        console.log(`Dropping to list idx: ${listIdx}`);
+        console.log(`Source list idx: ${sourceData.listIdx}`);
+        console.log(`Source task idx: ${sourceData.listIdx}`);
     }
 </script>
 
@@ -47,10 +52,11 @@
         </div>
         <div class="overflow-x-hidden overflow-y-auto with-scrollbar p-2">
             
-            {#each tasks as task (task.id)}
+            {#each tasks as task, taskIdx (task.id)}
                 <TaskItem 
                 {task}
                 {listIdx}
+                {taskIdx}
                 />
             {/each}
             
