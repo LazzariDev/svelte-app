@@ -2,6 +2,8 @@
     import "../app.css";
     import TrendsSidebar from '../components/sidebars/TrendsSidebar.svelte';
 	import NavSidebar from '../components/sidebars/NavSidebar.svelte';
+
+    export let data;
 </script>
   
 <div class="w-full h-full bg-gray-900 text-gray-100">
@@ -24,7 +26,7 @@
 
                         </div>
 						<div class="flex-it md:w-92 w-0 mt-4">
-							<TrendsSidebar />
+							<TrendsSidebar trends={data.trends}/>
 						</div>
 					</div>
 				</div>
