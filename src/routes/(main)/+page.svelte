@@ -1,12 +1,9 @@
 <script>
 	import TiImageOutline from 'svelte-icons/ti/TiImageOutline.svelte';
     import GlidePost from "../../components/glides/GlidePost.svelte"
-	import { getUiContext } from '@components/context/UI';
 
     let glides = [];
     let glideContent = "";
-
-    const { documentBody, isXl, isLg } = getUiContext();
 
     function createGlide() {
         const date = new Date();
@@ -82,9 +79,6 @@
     </div>
     <!-- MESSENGER END -->
 </div>
-{JSON.stringify($documentBody)}
-isXl: {$isXl}
-isLg: {$isLg}
 <div class="h-px bg-gray-700 my-1" />
 {#each glides as glide (glide.id)}
     <GlidePost {glide} />
