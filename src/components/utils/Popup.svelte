@@ -1,6 +1,7 @@
 <script>
-    import { beforeUpdate, afterUpdate, onMount } from "svelte";
+    import { afterUpdate, onMount } from "svelte";
 	import Portal from "./Portal.svelte";
+    import { clickOutside } from "@components/actions/clickOutside";
 
     let isOpen = false;
     let openerMenu;
@@ -9,15 +10,9 @@
     let popupBottomPosition;
     let popupLeftPosition;
 
-    /* beforeUpdate(() => {
-
-    }); */
-
     onMount(() => {
-        addEventListener("click", closePopup);
         addEventListener("resize", adjustPopup);
         return () => {
-            removeEventListener("click", closePopup);
             removeEventListener("resize", adjustPopup);
         }
     });
@@ -35,14 +30,6 @@
 
     }
 
-    function closePopup(e) {
-        if (isOpen && !isPopupClicked(e.target)) isOpen = false;
-    }
-
-    function isPopupClicked(targetElement) {
-        return popup.contains(targetElement);
-    }
-
 </script>
   
 <div class="flex-it">
@@ -56,6 +43,10 @@
     {#if isOpen}
         <Portal>
             <div
+                on:outclick={() => {
+                    isOpen = false;
+                }}
+                use:clickOutside
                 bind:this={popup}
                 style="bottom: {popupBottomPosition}; left: {popupLeftPosition};" 
                 class="flex-it hover:cursor-pointer fixed bg-gray-800 text-white popup z-10 rounded-2xl border-gray-700 border transition duration-1000"
