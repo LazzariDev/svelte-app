@@ -1,8 +1,29 @@
 <script>
-	import TiTrash from 'svelte-icons/ti/TiTrash.svelte';
-	import TiMessage from 'svelte-icons/ti/TiMessage.svelte';
-	import TiHeartOutline from 'svelte-icons/ti/TiHeartOutline.svelte';
 	import TiImageOutline from 'svelte-icons/ti/TiImageOutline.svelte';
+    import GlidePost from "../components/glides/GlidePost.svelte"
+
+    let glides = [];
+    let glideContent = "";
+
+    function createGlide() {
+        const date = new Date();
+        const glide = {
+            id: date.toISOString(),
+            content: glideContent,
+            user: {
+                nickName: "Filip99",
+                avatar: "https://thrangra.sirv.com/Avatar1.png"
+            },
+            likesCount: 0,
+            subglidesCount: 0,
+            date
+        }
+
+        glides = [glide, ...glides]
+
+        glideContent = "";
+    }
+
 </script>
 
 <!-- HOME PAGE START -->
@@ -22,6 +43,7 @@
     <div class="flex-it flex-grow">
         <div class="flex-it">
             <textarea
+                bind:value={glideContent}
                 name="content"
                 rows="1"
                 id="glide"
@@ -42,6 +64,7 @@
             </div>
             <div class="flex-it w-32 mt-3 cursor-pointer">
                 <button
+                    on:click={createGlide}
                     type="button"
                     class="disabled:cursor-not-allowed disabled:bg-gray-400 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full flex-it transition duration-200"
                 >
@@ -57,58 +80,7 @@
     <!-- MESSENGER END -->
 </div>
 <div class="h-px bg-gray-700 my-1" />
-<!-- GLIDE POST START -->
-<div class="flex-it p-4 border-b-1 border-solid border-gray-700">
-    <div class="flex-it flex-row">
-        <div class="flex-it mr-4">
-            <div
-                class="w-12 h-12 overflow-visible cursor-pointer transition duration-200 hover:opacity-80"
-            >
-                <img
-                    alt=""
-                    class="rounded-full"
-                    src="https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png"
-                />
-            </div>
-        </div>
-        <article class="flex-it flex-grow flex-shrink cursor-pointer">
-            <div class="flex-it justify-center flex-grow mb-1">
-                <div class="flex-it justify-between flex-row w-full">
-                    <div>
-                        <span class="font-bold">Filip99</span>
-                        <span class="mx-2">&#8226;</span>
-                        <span class="text-gray-400">2h</span>
-                    </div>
-                    <div class="text-gray-400 cursor-pointer transition hover:text-red-400">
-                        <div class="icon">
-                            <TiTrash />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-it flex-row flex-grow-0 items-center mb-2">
-                <div class="flex-it mr-3 mb-3 w-full">My First Post</div>
-            </div>
-            <div class="flex-it flex-row flex-grow text-gray-400">
-                <div
-                    class="flex-it flex-row items-center cursor-pointer mr-5 transition hover:text-blue-400"
-                >
-                    <div class="icon">
-                        <TiMessage />
-                    </div>
-                    <span class="text-xs ml-3">321</span>
-                </div>
-                <div
-                    class="flex-it flex-row items-center cursor-pointer transition hover:text-pink-400"
-                >
-                    <div class="icon">
-                        <TiHeartOutline />
-                    </div>
-                    <span class="text-xs ml-3">123</span>
-                </div>
-            </div>
-        </article>
-    </div>
-</div>
-<!-- GLIDE POST END -->
+{#each glides as glide (glide.id)}
+    <GlidePost {glide} />
+{/each}
 <!-- HOME PAGE END -->
