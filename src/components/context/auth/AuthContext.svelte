@@ -8,7 +8,7 @@
     let isLoading = writable(true);
 
     setContext(key, {
-        isAuthenticated, isL
+        isAuthenticated, isLoading
     })
 
 </script>
