@@ -6,13 +6,13 @@
 
     const { isAuthenticated } = getAuthContext();
 
-    if (isAuthenticated) {
+    if ($isAuthenticated) {
         goto("/")
     }
 
 </script>
 
 
-{#if !isAuthenticated}
+{#if !$isAuthenticated}
     <slot />
 {/if}

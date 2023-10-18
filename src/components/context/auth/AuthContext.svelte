@@ -10,7 +10,7 @@
         setTimeout(() => {
             set(true);
             isLoading.set(false);
-        }, 2000)
+        }, 1000)
     });
 
 
