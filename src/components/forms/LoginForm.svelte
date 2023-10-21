@@ -1,15 +1,11 @@
 
 <script>
-    import { formHandlerStore } from "@stores/formHandler";
+    import { createFormStore } from "@stores/formHandler";
 
-    const { validate, setForm, form } = formHandlerStore;
-
-    let loginFormData = {
+    const { validate, form } = createFormStore({
         email: "",
         password: "",
-    }
-
-    setForm(loginFormData);
+    });
 
     function submitForm() {
         alert(JSON.stringify($form));
