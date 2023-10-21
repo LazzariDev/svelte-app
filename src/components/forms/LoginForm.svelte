@@ -23,7 +23,7 @@
                 <div class="flex-it py-2">
                     <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                     <input
-                        bind:value={loginFormData.email}
+                        bind:value={$form.email}
                         use:validate={[1]}
                         type="emai l"
                         name="email"
@@ -39,7 +39,7 @@
                         Password
                     </label>
                     <input
-                        bind:value={loginFormData.password}
+                        bind:value={$form.password}
                         use:validate={[2]}
                         type="password"
                         name="password"
