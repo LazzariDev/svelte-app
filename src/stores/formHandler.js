@@ -5,8 +5,14 @@ export function createFormStore(initialData) {
     const form = writable(initialData);
 
     function validate(node, value) {
-        console.log(node)
-        console.log(value)
+        
+        node.onblur = (e) => {
+            console.log(`blur on ${e.target.name} called with value ${e.target.value}`);
+        }
+
+        node.oninput = (e) => {
+            console.log(`onInput on ${e.target.name} called with value ${e.target.value}`);
+        }
     }
 
     return {
