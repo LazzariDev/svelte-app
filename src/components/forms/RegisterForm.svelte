@@ -1,8 +1,10 @@
 
 <script>
-    import { validate } from "@actions/validate";
+    import { formHandlerStore } from "@stores/formHandler";
 
-    let registerFormData = {
+    const { validate, form, setForm } = formHandlerStore;
+
+    const registerFormData = {
         fullName: "",
         nickName: "",
         email: "",
@@ -11,8 +13,10 @@
         passwordConfirmation: "",
     }
 
+    setForm(registerFormData);
+
     function submitForm() {
-       alert(JSON.stringify(registerFormData)) 
+       alert(JSON.stringify($form)) 
     }
 </script>
 
@@ -25,7 +29,7 @@
                         Full Name
                     </label>
                     <input
-                        bind:value={registerFormData.fullName}
+                        bind:value={$form.fullName}
                         use:validate={[1]}
                         type="text"
                         name="fullName"
@@ -42,7 +46,7 @@
                         Nick Name
                     </label>
                     <input
-                        bind:value={registerFormData.nickName}
+                        bind:value={$form.nickName}
                         use:validate={[2]}
                         type="text"
                         name="nickName"
@@ -54,7 +58,7 @@
                 <div class="flex-it py-2">
                     <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                     <input
-                        bind:value={registerFormData.email}
+                        bind:value={$form.email}
                         use:validate={[3]}
                         type="text"
                         name="email"
@@ -66,7 +70,7 @@
                 <div class="flex-it py-2">
                     <label for="avatar" class="block text-sm font-medium text-gray-700"> Avatar </label>
                     <input
-                        bind:value={registerFormData.avatar}
+                        bind:value={$form.avatar}
                         use:validate={[4]}
                         type="text"
                         name="avatar"
@@ -80,7 +84,7 @@
                         Password
                     </label>
                     <input
-                        bind:value={registerFormData.password}
+                        bind:value={$form.password}
                         use:validate={[5]}
                         type="password"
                         name="password"
@@ -94,7 +98,7 @@
                         Password Confirmation
                     </label>
                     <input
-                        bind:value={registerFormData.passwordConfirmation}
+                        bind:value={$form.passwordConfirmation}
                         use:validate={[6]}
                         type="password"
                         name="passwordConfirmation"

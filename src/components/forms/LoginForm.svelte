@@ -1,12 +1,18 @@
 
 <script>
+    import { formHandlerStore } from "@stores/formHandler";
+
+    const { validate, setForm, form } = formHandlerStore;
+
     let loginFormData = {
         email: "",
         password: "",
     }
 
+    setForm(loginFormData);
+
     function submitForm() {
-        alert(JSON.stringify(loginFormData));
+        alert(JSON.stringify($form));
     }
 </script>
 
@@ -18,7 +24,8 @@
                     <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                     <input
                         bind:value={loginFormData.email}
-                        type="email"
+                        use:validate={[1]}
+                        type="emai l"
                         name="email"
                         id="email"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -33,6 +40,7 @@
                     </label>
                     <input
                         bind:value={loginFormData.password}
+                        use:validate={[2]}
                         type="password"
                         name="password"
                         id="password"
