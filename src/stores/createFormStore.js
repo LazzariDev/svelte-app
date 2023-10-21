@@ -1,3 +1,4 @@
+import { error } from "@sveltejs/kit";
 import { writable } from "svelte/store"
 
 export function createFormStore(initialData) {
@@ -14,7 +15,13 @@ export function createFormStore(initialData) {
         const isValid = false;
 
         if (!isValid) {
-            errors.set({[element.name]: errorMessage})
+            /* errors.update((_errors) => {
+                _errors[element.name] = errorMessage;
+                return _errors;
+            }) */
+            // Upper code commented and botton line are the same
+            errors.update((_errors) => ({...errors, [element.name]: errorMessage}));
+
         } else {
             alert("No Errors!")
         }
