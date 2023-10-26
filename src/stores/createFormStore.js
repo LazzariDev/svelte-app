@@ -11,28 +11,16 @@ export function createFormStore(initialData) {
     }
 
     const checkValidity = (element, validators) => () => {
-        const errorMessage = maxLengthValidator(element, 3);
-        
-        if (errorMessage) {
-            /* errors.update((_errors) => {
-                _errors[element.name] = errorMessage;
-                return _errors;
-            }) */
-            // Upper code commented and botton line are the same
-            errors.update((_errors) => ({...errors, [element.name]: errorMessage}));
-
-        } else {
-            errors.update((_errors) => ({...errors, [element.name]: ""}));
+       
+        for ( const validator of validators) {
+            const errorMessage = validator(element);
+            
+            if (errorMessage) {
+                errors.update((_errors) => ({...errors, [element.name]: errorMessage}));
+            } else {
+                errors.update((_errors) => ({...errors, [element.name]: ""}));
+            }
         }
-    }
-
-    function maxLengthValidator(element, maxLength = 7) {
-        if (
-            element.value.length === 0 ||
-            element.value.length < maxLength 
-            ) { return ""; }
-
-        return `${element.name} should be less then ${maxLength} cahracters`;
     }
 
     return {
@@ -49,4 +37,10 @@ export function maxLengthValidator(element, maxLength = 7) {
         ) { return ""; }
 
     return `${element.name} should be less then ${maxLength} cahracters`;
+}
+
+export function firstUppercaseLetter({value, name}) {
+    if (value.length === 0) { return true; }
+
+    return value[0] === value[0].toUpperCase() ? "" : `${name} first letter must be uppercased`;
 }
