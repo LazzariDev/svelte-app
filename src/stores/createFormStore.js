@@ -35,17 +35,30 @@ export function createFormStore(initialData) {
     }
 }
 
+export function requiredValidator({name, value}) {
+    return value.length === 0 ? `${name} is required` : "";
+}
+
+export function minLengthValidator(element, minLength = 7) {
+    if (
+        element.value.length === 0 ||
+        element.value.length > minLength 
+    ) { return ""; }
+
+    return `${element.name} should be more than ${minLength} cahracters`;
+}
+
 export function maxLengthValidator(element, maxLength = 7) {
     if (
         element.value.length === 0 ||
         element.value.length < maxLength 
         ) { return ""; }
 
-    return `${element.name} should be less then ${maxLength} cahracters`;
+    return `${element.name} should be less than ${maxLength} cahracters`;
 }
 
 export function firstUppercaseLetter({value, name}) {
-    if (value.length === 0) { return true; }
+    if (value.length === 0) { return ""; }
 
     return value[0] === value[0].toUpperCase() ? "" : `${name} first letter must be uppercased`;
 }
