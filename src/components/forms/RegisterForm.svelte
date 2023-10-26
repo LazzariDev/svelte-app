@@ -1,6 +1,6 @@
 
 <script>
-    import { createFormStore } from "@stores/createFormStore";
+    import { createFormStore, maxLengthValidator } from "@stores/createFormStore";
 
     const { validate, form, errors } = createFormStore({
         fullName: "",
@@ -27,7 +27,7 @@
                     </label>
                     <input
                         bind:value={$form.fullName}
-                        use:validate={[1]}
+                        use:validate={[maxLengthValidator]}
                         type="text"
                         name="fullName"
                         id="fullName"
@@ -44,7 +44,7 @@
                     </label>
                     <input
                         bind:value={$form.nickName}
-                        use:validate={[2]}
+                        use:validate={[maxLengthValidator]}
                         type="text"
                         name="nickName"
                         id="nickName"
@@ -56,7 +56,7 @@
                     <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                     <input
                         bind:value={$form.email}
-                        use:validate={[3]}
+                        use:validate
                         type="text"
                         name="email"
                         id="email"
@@ -68,7 +68,7 @@
                     <label for="avatar" class="block text-sm font-medium text-gray-700"> Avatar </label>
                     <input
                         bind:value={$form.avatar}
-                        use:validate={[4]}
+                        use:validate
                         type="text"
                         name="avatar"
                         id="avatar"
@@ -82,7 +82,7 @@
                     </label>
                     <input
                         bind:value={$form.password}
-                        use:validate={[5]}
+                        use:validate
                         type="password"
                         name="password"
                         id="password"
@@ -96,7 +96,7 @@
                     </label>
                     <input
                         bind:value={$form.passwordConfirmation}
-                        use:validate={[6]}
+                        use:validate
                         type="password"
                         name="passwordConfirmation"
                         id="passwordConfirmation"

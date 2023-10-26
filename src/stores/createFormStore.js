@@ -6,13 +6,13 @@ export function createFormStore(initialData) {
     const form = writable(initialData);
     const errors = writable({});
 
-    function validate(node) {
-        node.onblur = checkValidity(node);
+    function validate(node, validators = []) {
+        node.onblur = checkValidity(node, validators);
     }
 
-    const checkValidity = (element) => () => {
+    const checkValidity = (element, validators) => () => {
         const errorMessage = maxLengthValidator(element, 3);
-
+        
         if (errorMessage) {
             /* errors.update((_errors) => {
                 _errors[element.name] = errorMessage;
@@ -40,4 +40,13 @@ export function createFormStore(initialData) {
         form,
         errors: {subscribe: errors.subscribe}
     }
+}
+
+export function maxLengthValidator(element, maxLength = 7) {
+    if (
+        element.value.length === 0 ||
+        element.value.length < maxLength 
+        ) { return ""; }
+
+    return `${element.name} should be less then ${maxLength} cahracters`;
 }
