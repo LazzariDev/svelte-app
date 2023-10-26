@@ -11,10 +11,9 @@ export function createFormStore(initialData) {
     }
 
     const checkValidity = (element) => () => {
-        const errorMessage = "ERROR ERROR ERROR!"
-        const isValid = validator();
+        const errorMessage = maxLengthValidator(element, 3);
 
-        if (!isValid) {
+        if (errorMessage) {
             /* errors.update((_errors) => {
                 _errors[element.name] = errorMessage;
                 return _errors;
@@ -27,8 +26,13 @@ export function createFormStore(initialData) {
         }
     }
 
-    function validator(params) {
-        return Math.floor(Math.random() * 2) === 0 ? false : true;
+    function maxLengthValidator(element, maxLength = 7) {
+        if (
+            element.value.length === 0 ||
+            element.value.length < maxLength 
+            ) { return ""; }
+
+        return `${element.name} should be less then ${maxLength} cahracters`;
     }
 
     return {
