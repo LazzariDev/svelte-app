@@ -11,14 +11,19 @@ export function createFormStore(initialData) {
     }
 
     const checkValidity = (element, validators) => () => {
-       
+        errors.update(_errors => {
+            _errors[element.name] = [];
+            return _errors;
+        })
+
         for ( const validator of validators) {
             const errorMessage = validator(element);
             
             if (errorMessage) {
-                errors.update((_errors) => ({...errors, [element.name]: errorMessage}));
-            } else {
-                errors.update((_errors) => ({...errors, [element.name]: ""}));
+                errors.update(_errors => {
+                    _errors[element.name].push (errorMessage);
+                    return _errors;
+                })
             }
         }
     }
