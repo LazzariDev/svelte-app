@@ -8,7 +8,7 @@
     } from "@stores/createFormStore";
 	import FormErrors from "./FormErrors.svelte";
 
-    const { validate, form, errors } = createFormStore({
+    const { validate, submitForm, form, errors } = createFormStore({
         fullName: "",
         nickName: "",
         email: "",
@@ -17,8 +17,8 @@
         passwordConfirmation: "",
     });
 
-    function submitForm() {
-       alert(JSON.stringify($form)) 
+    function handleFormSubmit(formData) {
+       alert(JSON.stringify(formData)); 
     }
 </script>
 
@@ -126,7 +126,7 @@
         </div>
         <div class="flex-it py-2">
             <button
-            on:click={submitForm}
+            on:click={submitForm(handleFormSubmit)}
                 type="button"
                 class="bg-blue-400 hover:bg-blue-500 focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-400 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-offset-2"
             >
