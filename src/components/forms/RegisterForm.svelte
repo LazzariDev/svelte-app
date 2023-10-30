@@ -8,7 +8,7 @@
     } from "@stores/createFormStore";
 	import FormErrors from "./FormErrors.svelte";
 
-    const { validate, submitForm, form, errors } = createFormStore({
+    const { validate, submitForm, setValue, errors } = createFormStore({
         fullName: "",
         nickName: "",
         email: "",
@@ -31,7 +31,7 @@
                         Full Name
                     </label>
                     <input
-                        bind:value={$form.fullName}
+                        on:input={setValue}
                         use:validate={[
                             requiredValidator,
                             (el) => minLengthValidator(el, 5),
@@ -50,7 +50,7 @@
                         Nick Name
                     </label>
                     <input
-                        bind:value={$form.nickName}
+                        on:input={setValue}
                         use:validate={[
                             requiredValidator,
                             (el) => minLengthValidator(el, 3)
@@ -66,7 +66,7 @@
                 <div class="flex-it py-2">
                     <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                     <input
-                        bind:value={$form.email}
+                        on:input={setValue}
                         use:validate={[requiredValidator]}
                         type="text"
                         name="email"
@@ -79,7 +79,7 @@
                 <div class="flex-it py-2">
                     <label for="avatar" class="block text-sm font-medium text-gray-700"> Avatar </label>
                     <input
-                        bind:value={$form.avatar}
+                        on:input={setValue}
                         use:validate={[requiredValidator]}
                         type="text"
                         name="avatar"
@@ -94,7 +94,7 @@
                         Password
                     </label>
                     <input
-                        bind:value={$form.password}
+                        on:input={setValue}
                         use:validate={[requiredValidator]}
                         type="password"
                         name="password"
@@ -109,7 +109,7 @@
                         Password Confirmation
                     </label>
                     <input
-                        bind:value={$form.passwordConfirmation}
+                        on:input={setValue}
                         use:validate={[requiredValidator]}
                         type="password"
                         name="passwordConfirmation"
