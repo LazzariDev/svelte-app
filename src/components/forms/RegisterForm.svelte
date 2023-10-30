@@ -2,6 +2,7 @@
 <script>
     import { 
         createFormStore,
+        compareWidthValidator,
         requiredValidator,
         minLengthValidator,
         firstUppercaseLetter,
@@ -110,7 +111,10 @@
                     </label>
                     <input
                         on:input={setValue}
-                        use:validate={[requiredValidator]}
+                        use:validate={[
+                            requiredValidator,
+                            (ele) => compareWidthValidator(ele, "password")
+                        ]}
                         type="password"
                         name="passwordConfirmation"
                         id="passwordConfirmation"
