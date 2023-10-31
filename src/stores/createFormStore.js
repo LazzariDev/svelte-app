@@ -96,7 +96,7 @@ export const compareWidthValidator = (element, comparedToFieldName) => (form) =>
     return element.value === compareToValue ? "" : `${niceName(element.name)} should be same as ${niceName(comparedToFieldName)}`;
 }
 
-export const requiredValidator = ({name, value}) => (form) => {
+export const requiredValidator = ({name, value}) => () => {
     return value.length === 0 ? `${niceName(name)} is required` : "";
 }
 

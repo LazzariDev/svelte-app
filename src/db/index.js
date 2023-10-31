@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore"; //getFirestore: access to Firestore database
+import { getFirestore } from "firebase/firestore"; //getFirestore: access to Firestore database
+import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,12 +15,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
-export async function getUsers() {
-    const usersCol = collection(db, "users");
-    const userSnap = await getDocs(usersCol);
-    
-    const userList = userSnap.docs.map(doc => doc.data());
-    console.log(userList);
-    return userList;
-}
+export const firebaseAuth = getAuth(app);

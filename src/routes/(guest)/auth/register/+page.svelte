@@ -1,11 +1,12 @@
 <script>
 	import RegisterForm from "@components/forms/RegisterForm.svelte";
 	import AuthLayout from "@components/layouts/AuthLayout.svelte";
-	import { getUsers } from "@db/index";
 
-	getUsers();
+	function register(formData) {
+		console.log(formData);
+	}
 </script>
 
 <AuthLayout title="Create New Account">
-	<RegisterForm />
+	<RegisterForm onFormSubmit={register} />
 </AuthLayout>
