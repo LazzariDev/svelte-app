@@ -13,6 +13,7 @@ const config = {
 			"@components": "./src/components/*",
 			"@actions": "./src/actions/*",
 			"@stores": "./src/stores/*",
+			"@db": "./src/db/*",
 		}
 	},
 	preprocess: vitePreprocess()
