@@ -1,8 +1,8 @@
-
+import { firebaseAuth } from "@db/index";  
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 function registerUser(form) {
-    //We will call here firebase  auth and we will register a user
-    console.log(form);
+    return createUserWithEmailAndPassword(firebaseAuth, form.email, form.password);
 }
 
 export { registerUser }
