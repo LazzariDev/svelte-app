@@ -6,9 +6,12 @@
 
     const { auth } = getAuthContext();
 
-    if ($auth.isAuthenticated) {
-        goto("/")
+    $: {
+        if ($auth.isAuthenticated) {
+            goto("/")
+        }
     }
+
 
 </script>
 

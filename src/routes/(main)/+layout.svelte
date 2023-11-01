@@ -7,9 +7,12 @@
 
 	export let data;
 
-	if (!$auth.isAuthenticated) {
-		goto("/auth/login");
+	$: {
+		if (!$auth.isAuthenticated) {
+			goto("/auth/login");
+		}
 	}
+
 </script>
  
 {#if $auth.isAuthenticated}	
