@@ -8,31 +8,36 @@
 	import { firebaseAuth } from "@db/index";
     
     let isLoading = writable(true);
-    let isAuthenticated = writable(false);
+    let auth = writable({
+        isAuthenticated: false,
+        user: null
+    });
 
 
     setContext(key, {
-        isAuthenticated, isLoading
+        auth, isLoading
     })
 
-    onMount(() => {
+    onMount(listenToAuthChanges);
+
+    function listenToAuthChanges() {
         onAuthStateChanged(firebaseAuth, (user) => {
             if (user) {
-                isAuthenticated.set(true);
+                auth.set({isAuthenticated: true, user});
             } else {
-                isAuthenticated.set(false);
+                auth.set({isAuthenticated: false, user: null});
             }
 
             isLoading.set(false);
         })
-    })
+    }
 </script>
 
-{#if $isLoading && !$isAuthenticated}
-<!-- isLoading true -->
-<Loader size={80}/>
+{#if $isLoading}
+    <!-- isLoading true -->
+    <Loader size={80}/>
 {:else}
-<slot />
+    <slot />
 {/if}
 <!-- In the if above is checked also !$isAuthenticated just to subscribe so start function can be called   -->
 <!-- The same thing can be achived as follow: -->
