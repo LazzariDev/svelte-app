@@ -4,7 +4,7 @@
 	import AuthLayout from "@components/layouts/AuthLayout.svelte";
 
 	async function register(formData) {
-		const { user } = await registerUser(formData);
+		const user = await registerUser(formData);
 		console.log(user);
 	}
 
