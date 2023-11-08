@@ -17,14 +17,25 @@
     }
     
     function addSnackbar(message, type) {
-        snackbars.update(list => [{message, type}, ...list])
+        snackbars.update(list => [{message, type, id: new Date().toISOString()}, ...list])
+    }
+
+    const removeSnackbar = (id) => () => {
+        snackbars.update(list => {
+            const index = list.findIndex((snackbar) => snackbar.id === id);
+            if (index > -1 ) {
+                list.splice(index, 1)
+            }
+
+            return list;
+        })
     }
 
     setContext(key, {
         isXl,
         isLg,
         snackbars,
-        addSnackbar
+        addSnackbar, removeSnackbar
     });
 </script>
 
