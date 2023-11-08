@@ -11,6 +11,7 @@
 
     let intervalId;
 
+    $: progress = Math.floor((duration / autoHideDuration) * 100);
     $: duration = autoHideDuration;
     $: {
         if (duration <= 0) {
@@ -53,7 +54,7 @@
         { message }
     </div>
     <div 
-      style="width: {100}%"
+      style="width: {progress}%"
       class="bg-black opacity-40 text-right h-2"
     >
     </div>
