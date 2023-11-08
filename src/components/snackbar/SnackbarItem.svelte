@@ -1,9 +1,23 @@
 <script>
+	import { onMount } from 'svelte';
     import TiTimesOutline from 'svelte-icons/ti/TiTimesOutline.svelte'
     
+    const INTERVAL_STEP = 50;
+
     export let message;
     export let type = "warning";
+    export let autoHideDuration = 2000;
     export let onClose;
+
+    let intervalId;
+
+    $: duration = autoHideDuration;
+    $: {
+        if (duration <= 0) {
+            clearInterval(intervalId);
+            onClose();
+        }
+    };
 
     let bgColor;
     if (type === "success") {
@@ -13,6 +27,13 @@
     } else {
         bgColor = "bg-yellow-500";
     }
+
+    onMount(() => {
+        intervalId = setInterval(() => {
+            duration -= INTERVAL_STEP;
+        }, INTERVAL_STEP)
+    })
+
   </script>
   
 <div
