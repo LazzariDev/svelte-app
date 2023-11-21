@@ -2,8 +2,10 @@
 	import Messenger from "@components/utils/Messenger.svelte";
     import GlidePost from "../../components/glides/GlidePost.svelte"
 	import { createGlideStore } from "@stores/createGlideStore";
+	import DataLoaderIndicator from "@components/utils/DataLoaderIndicator.svelte";
+	import CenteredDataLoader from "@components/utils/CenteredDataLoader.svelte";
 
-    const { glides, addGlide } = createGlideStore();
+    const { glides, loading, addGlide } = createGlideStore();
 </script>
 
 <Messenger 
@@ -14,4 +16,7 @@
 {#each $glides as glide (glide.id)}
     <GlidePost {glide} />
 {/each}
-<!-- HOME PAGE END -->
+
+{#if $loading}
+    <CenteredDataLoader />
+{/if}

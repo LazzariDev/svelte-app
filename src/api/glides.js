@@ -1,14 +1,22 @@
 import { db } from "@db/index";
-import { Timestamp, doc, collection, getDocs, query, addDoc } from "firebase/firestore"
+import { Timestamp, doc, collection, getDocs, getDoc, query, addDoc, orderBy, limit } from "firebase/firestore"
 
 async function fetchGlides() {
-    const q = query(collection(db, "glides"));
+    const constraints = [
+        orderBy("date", "desc"),
+        limit(10)
+    ]
+
+    const q = query(collection(db, "glides"), ...constraints);
     const qSnapshot = await getDocs(q);
 
-    const glides = qSnapshot.docs.map(doc => {
+    const glides = await Promise.all(qSnapshot.docs.map(async doc => {
         const glide = doc.data();
+        const userSnapshot = await getDoc(glide.user)
+        glide.user = userSnapshot.data();
+
         return {...glide, id: doc.id};
-    })
+    }));
 
     return {glides};
 }
