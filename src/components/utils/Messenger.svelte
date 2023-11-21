@@ -1,4 +1,5 @@
 <script>
+	import { createGlide } from '@api/glides';
 	import { getUiContext } from '@components/context/UI';
 	import { getAuthContext } from '@components/context/auth';
 	import TiImageOutline from 'svelte-icons/ti/TiImageOutline.svelte';
@@ -8,13 +9,38 @@
 
     export let onGlidePosted;
 
-    let glideContent = "";
+    let form = { content: "" };
+    let loading = false;
 
     $: user = $auth?.user;
+    $: sendDisabled = loading || form.content === "";
 
-    function createGlide() {
-        addSnackbar("Glide Created", "success");
-        onGlidePosted();
+    async function submitGlide() {
+        loading = true;
+        
+        // Making request to store glide to FireStore
+        const glideData = {
+            ...form,
+            uid: user.uid
+        }
+        
+        try {
+            const glide = await createGlide(glideData);
+            const userData = {
+                nickName: user.nickName,
+                avatar: user.avatar
+            }
+            onGlidePosted({...glide, user: userData});
+            addSnackbar("Glide Created", "success");
+            form.content = "";
+        } catch (e) {
+            addSnackbar(e.message, "error");
+            
+        } finally {
+            loading = false;
+        }
+
+
     }
 </script>
 
@@ -33,7 +59,7 @@
     <div class="flex-it flex-grow">
         <div class="flex-it">
             <textarea
-                bind:value={glideContent}
+                bind:value={form.content}
                 name="content"
                 rows="1"
                 id="glide"
@@ -54,7 +80,8 @@
             </div>
             <div class="flex-it w-32 mt-3 cursor-pointer">
                 <button
-                    on:click={createGlide}
+                    on:click={submitGlide}
+                    disabled={sendDisabled}
                     type="button"
                     class="disabled:cursor-not-allowed disabled:bg-gray-400 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full flex-it transition duration-200"
                 >

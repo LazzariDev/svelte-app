@@ -27,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"firebase": "^10.5.2",
+		"moment": "^2.29.4",
 		"svelte-icons": "^2.1.0"
 	}
 }

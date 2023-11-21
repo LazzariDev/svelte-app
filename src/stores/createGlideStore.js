@@ -3,8 +3,8 @@ import { writable } from "svelte/store"
 export function createGlideStore() {
     const glides = writable([]);
 
-    function addGlide() {
-        console.log("Adding Glide!");
+    function addGlide (glide) {
+        glides.update(list => [glide, ...list])
     }
 
 
